@@ -4,3 +4,5 @@ build/
 node_modules/
 *.drawio
 *.sqlite
+*.config.json
+!example.config.json
