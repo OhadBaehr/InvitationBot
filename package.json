@@ -12,6 +12,10 @@
         "build": "tsc"
     },
     "keywords": [],
+    "author": {
+        "email": "fadiatamny@gmail.com",
+        "name": "Fadi Atamny"
+    },
     "readmeFilename": "README.md",
     "license": "GPL-3.0 License",
     "dependencies": {
