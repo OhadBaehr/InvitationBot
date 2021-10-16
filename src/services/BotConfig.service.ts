@@ -28,7 +28,7 @@ export class BotConfig implements BotConfigModel {
 
         if (data) {
             const config = JSON.parse(data) as Dictionary
-            this._specialRoles = config.roles ?? ['Approved']
+            this._specialRoles = config.specialRoles ?? ['Approved']
         } else {
             this._specialRoles = ['Approved']
         }

@@ -3,7 +3,13 @@ import path from 'path'
 import { Logger } from '../utils/Logger'
 
 export class FileLoader {
-    private static _logger: Logger = new Logger('FileLoader')
+    private static _logger: Logger
+    private static get logger() {
+        if (!this._logger) {
+            this._logger = new Logger('FileLoader')
+        }
+        return this._logger
+    }
 
     public static fileExists(filePath: string) {
         return fs.existsSync(filePath)
@@ -17,7 +23,7 @@ export class FileLoader {
             }
             return fs.readFileSync(fullPath, { encoding })
         } catch (e) {
-            this._logger.warn(e)
+            this.logger.warn(e)
             return null
         }
     }
@@ -27,7 +33,7 @@ export class FileLoader {
             const fullPath = path.join(__dirname, filePath)
             fs.writeFileSync(fullPath, data)
         } catch (e) {
-            this._logger.warn(e)
+            this.logger.warn(e)
         }
     }
 }
