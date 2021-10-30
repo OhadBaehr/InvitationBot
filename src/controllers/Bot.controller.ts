@@ -289,13 +289,15 @@ export default class BotController {
                     if (!dbInvite) {
                         dbInvite = new Invitation({
                             code: invite.code,
-                            inviter: invite.inviter?.id ?? 'none'
+                            inviter: invite.inviter?.id ?? 'none',
+                            uses: invite.uses ?? 0
                         })
                         this._db.add(dbInvite)
                     }
 
-                    await this._db.update(dbInvite.code, { uses: dbInvite.uses + 1 })
-                    if (invite.uses !== dbInvite.uses) {
+                    await this._db.update(dbInvite.code, { uses: invite.uses ?? dbInvite.uses + 1 })
+
+                    if (invite.uses && invite.uses !== dbInvite.uses) {
                         const roleName = `pending-${invite.code}`
                         const roles = await member.guild.roles.fetch()
                         let role = roles.find((r) => r.name === roleName)
